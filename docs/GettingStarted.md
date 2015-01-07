@@ -8,7 +8,7 @@ Bpipe is designed to be easy to get started with.  Make sure you've installed Bp
 Enter the following lines into a text file and save it as helloworld.pipe:
 
 ```groovy 
-
+:::groovy
 hello = {
   exec "echo Hello"
 }
