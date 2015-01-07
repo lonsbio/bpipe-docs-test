@@ -1,5 +1,6 @@
 site_name: Bpipe Documentation
 repo_url: https://github.com/ssadedin/bpipe
+theme: bootstrap
 pages:
 - ['index.md', 'Introduction']
 - ['GettingStarted.md', 'Tutorials', 'Hello, World']
