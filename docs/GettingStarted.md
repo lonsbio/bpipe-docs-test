@@ -21,10 +21,7 @@ Bpipe.run { hello + world }
 
 Now type:
 
-```groovy 
-
-bpipe run helloworld.pipe
-```
+    bpipe run helloworld.pipe
 
 ## Explanation
 
