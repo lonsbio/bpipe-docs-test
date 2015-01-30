@@ -1,12 +1,12 @@
 # The jobs command
 
-## Synopsis
+### Synopsis
 
     
     
         bpipe jobs
     
 
-## Description
+### Description
 
 Display a list of currently running Bpipe jobs.
