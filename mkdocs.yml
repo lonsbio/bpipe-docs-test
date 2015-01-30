@@ -2,11 +2,11 @@ site_name: Bpipe Documentation
 repo_url: https://github.com/ssadedin/bpipe
 pages:
 - ['index.md', 'Introduction']
+- ['Guides/Overview.md','Guides','Overview']
 - ['Guides/ComparisonToWorkflowTools.md','Guides','Comparison To Workflow Tools']
 - ['Guides/Logging.md','Guides','Logging']
 - ['Guides/Modules.md','Guides','Modules']
 - ['Guides/Notifications.md','Guides','Notifications']
-- ['Guides/Overview.md','Guides','Overview']
 - ['Guides/ParallelTasks.md','Guides','Parallel Tasks']
 - ['Guides/Regions.md','Guides','Regions']
 - ['Guides/Reports.md','Guides','Reports']

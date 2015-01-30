@@ -1,6 +1,7 @@
 # The jobs command
 
-### Synopsis
+
+## Synopsis
 
     
     
