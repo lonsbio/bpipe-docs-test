@@ -1,7 +1,7 @@
 site_name: Bpipe Documentation
 repo_url: https://github.com/ssadedin/bpipe
 pages:
-- ['../README.md', 'Introduction']
+- ['index.md', 'Introduction']
 - ['GettingStarted.md', 'Tutorials', 'Hello, World']
 - ['ExampleWithInputsAndOutputs.md', 'Tutorials', 'Inputs and Outputs']
 - ['RealPipelineTutorial.md', 'Tutorials', 'A Real Bioinformatics Pipeline']
