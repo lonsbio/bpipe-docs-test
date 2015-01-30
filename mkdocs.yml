@@ -22,6 +22,7 @@ pages:
 - ['Examples/PairedEndAlignment.md','Examples','Paired End Alignment']
 - ['Examples/RNASeqCorset.md','Examples','RNA Seq Corset']
 - ['Examples/WGSVariantCalling.md','Examples','WGS Variant Calling']
+- ['Commands/Commands.md','Commands','Bpipe command overview']
 - ['Commands/cleanup.md','Commands','cleanup']
 - ['Commands/execute.md','Commands','execute']
 - ['Commands/history.md','Commands','history']
