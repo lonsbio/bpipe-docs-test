@@ -1,6 +1,6 @@
 #Bpipe command line utility
 
-Bpipe without any arguments will:
+Bpipe without any arguments will output a summary of the valid commands.
 
 ```
 Bpipe Version 0.9.8.6   Built on Wed Oct 22 16:06:17 EST 2014
@@ -38,6 +38,11 @@ usage: bpipe [run|test|debug|execute] [options] <pipeline> <in1> <in2>...
  -v,--verbose                     print internal logging to standard error
  -y,--yes                         answer yes to any prompts or questions
 ```
+
+Details on each argument are below.
+
+---
+
 
 ## query
 
