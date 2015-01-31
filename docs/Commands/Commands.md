@@ -138,7 +138,8 @@ And running it using:
 
 #### Description
 
-Show a list of the jobs that were previously run in the local folder including the bpipe command line and arguments.---
+Show a list of the jobs that were previously run in the local folder including the bpipe command line and arguments.
+---
 ## jobs
 
 
@@ -176,7 +177,8 @@ Will display the last 2000 lines of the log instead of the default (which is to 
 
 #### Description
 
-Display the log file for the currently running, or most recently run Bpipe job in the local directory.  If the job is running, this command will "tail" the log file using the -f option so that you see a continuous scrolling log.  If it is not finished it will show the trailing lines of the log and exit back to the shell.---
+Display the log file for the currently running, or most recently run Bpipe job in the local directory.  If the job is running, this command will "tail" the log file using the -f option so that you see a continuous scrolling log.  If it is not finished it will show the trailing lines of the log and exit back to the shell.
+---
 ## preserve
 
 #### Synopsis
@@ -259,7 +261,9 @@ It should also be noted that when a command in a pipeline stage fails, Bpipe wil
 
 *Note*:  There is preliminary support for Bpipe also to recognize if the commands in the pipeline stage have been modified and to use that information when deciding whether they need to be re-executed.   This is done by saving the outputs created by each command executed in the local .bpipe folder so that when Bpipe sees outputs that are newer than inputs it will also then check if the command that created the outputs is the same as the new command to be executed.  This support is currently not enabled in the released version of Bpipe.
 
-main feature of 'retry' is that it automatically looks up the exact that you ran the previous time you ran Bpipe in the local directory and re-executes it with the same options and input files. ---
+main feature of 'retry' is that it automatically looks up the exact that you ran the previous time you ran Bpipe in the local directory and re-executes it with the same options and input files. 
+
+---
 ## run
 
 #### Synopsis
@@ -320,7 +324,9 @@ The file params.txt should have one option per line, for example:
 
 #### Description
 
-Displays a list of currently running commands by the pipeline in the current directory.---
+Displays a list of currently running commands by the pipeline in the current directory.
+
+---
 ## stop
 
 #### Synopsis
@@ -332,7 +338,9 @@ Displays a list of currently running commands by the pipeline in the current dir
 
 #### Description
 
-Stop the current job (if any) that is currently running in the local folder.  Any inputs not finished being created by the currently executing pipeline stage(s) will be cleaned up and moved to the [[Trash|Trash Folder]].---
+Stop the current job (if any) that is currently running in the local folder.  Any inputs not finished being created by the currently executing pipeline stage(s) will be cleaned up and moved to the [[Trash|Trash Folder]].
+
+---
 ## test
 
 #### Synopsis
