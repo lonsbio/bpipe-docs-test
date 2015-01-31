@@ -1,6 +1,6 @@
-# The about statement
+## The about statement
 
-### Synopsis
+#### Synopsis
 
     
     
@@ -8,13 +8,13 @@
     
   
 
-### Behavior
+#### Behavior
 
 The *about* statement defines pipeline level documentation for a pipeline file.  It can be used any where at the top level of a pipeline file.  At the moment, *title* is the only supported attribute for pipeline documentation.
 
 Pipeline documentation is used in the HTML report that can be generated using the [run](run) command.
 
-### Examples
+#### Examples
 
 **Add a title to a pipeline**
 ```groovy 
@@ -24,14 +24,14 @@ about title: "Exome Variant Calling Pipeline"
 run { align_bwa + picard_dedupe + gatk_call_variants }
 ```
 ---
-# Variables in Bpipe
+## Variables in Bpipe
 
 Bpipe supports variables inside Bpipe scripts.  In Bpipe there are two kinds of variables: 
 
 - *implicit* variables  - variables defined by Bpipe for you
 - *explicit* variables  - variables you define yourself
 
-### Implicit Variables
+#### Implicit Variables
 
 Implicit variables are special variables that are made available to your Bpipe pipeline stages automatically.   The two important implicit variables are:
 
@@ -42,7 +42,7 @@ Implicit variables are special variables that are made available to your Bpipe p
 
 The input and output variables are how Bpipe automatically connects tasks together to make a pipeline.  The default input to a stage is the output from the previous stage. In general you should always try to use these variables instead of hard coding file names into your commands.   Using these variables ensures that your tasks are reusable and can be joined together to form flexible pipelines.  
 
-### =Extension Syntax for Input and Output Variables=
+#### =Extension Syntax for Input and Output Variables=
 
 Bpipe provides a special syntax for easily referencing inputs and outpus with specific file extensions. See [[ExtensionSyntax]] for more information.
 
@@ -62,7 +62,7 @@ Different tasks have different numbers of inputs and outputs, so what happens wh
 
 - When a stage has multiple outputs, the first such output is treated as the "primary" output and appears to the next stage as the "input" variable.  If the following stage only accepts a single input then its input will be the primary output of the previous stage.
 
-### Explicit Variables
+#### Explicit Variables
 
 Explicit variables are ones you define yourself.  These variables are created inline inside your Bpipe scripts using Java-like (or Groovy) syntax.  They can be defined inside your tasks or outside of your tasks to share them between tasks.  For example, here two variables are defined and shared between two tasks:
 ```groovy 
@@ -79,7 +79,7 @@ Explicit variables are ones you define yourself.  These variables are created in
   }
 ```
 
-### Variable Evaluation
+#### Variable Evaluation
 
 Most times the way you will use variables is by referencing them inside shell commands that you are running using the *exec* statement.  Such statements define the command using single quotes, double quotes or triple quotes.  Each kind of quotes handles variable expansion slightly differently:
 
@@ -123,7 +123,7 @@ will reach the shell as exactly:
 
 See the [[Exec|exec]] statement for a longer example of using triple quotes.
 
-### Referencing Variables Directly
+#### Referencing Variables Directly
 
 Inside a task the variables can be referenced using Java-like (actually Groovy) syntax.  In this example Java code is used to check if the input already exists:
 ```groovy 
@@ -138,7 +138,7 @@ Inside a task the variables can be referenced using Java-like (actually Groovy) 
 
 You won't normally need to use this kind of syntax in your Bpipe scripts, but it is available if you need it to handle complicated or advanced scenarios.
 
-### Differences from Bash Variable Syntax
+#### Differences from Bash Variable Syntax
 
 Bpipe's variable syntax is mostly compatible with the same syntax in languages like Bash and Perl. This is very convenient because it means that you can copy and paste commands directly from your command line into your Bpipe scripts, even if they use environment variables.
 
@@ -157,12 +157,14 @@ In this case the $ followed by the open bracket is illegal because Bpipe will tr
   exec "for i in \$(ls **.bam); do samtools index $i; done"
 ```
 
-- Bpipe treats a `.` as a special character for querying a property, while Bash merely delimits a variable name with it. Hence if you wish to write `$foo.txt` to have a file with '.txt' appended to the value of variable foo, you need to use curly braces: `${foo}.txt`.---
-# Branch Variables
+- Bpipe treats a `.` as a special character for querying a property, while Bash merely delimits a variable name with it. Hence if you wish to write `$foo.txt` to have a file with '.txt' appended to the value of variable foo, you need to use curly braces: `${foo}.txt`.
+
+---
+## Branch Variables
 
 A common need is to communicate information between disparate parts of your pipeline. Often this information is scoped to the context of a particular branch or segment of your pipeline. Bpipe supports this by the use of "branch variables".
 
-### Creating Branch Variables
+#### Creating Branch Variables
 
 Each branch of a pipeline (including the root), is passed an implicit variable called 'branch'. If referenced as a value this variable evaluates to the name of the branch in which the stage is running. For example, if you have split by chromosome using the [[Chr|chr]] command, the name of the branch is the chromosome for which the branch is executing. If you have split by file then it is the name of the file (or unique portion thereof) that is specific to the branch.
 
@@ -175,7 +177,7 @@ hello = {
 }
 ```
 
-### Referencing Branch Variables
+#### Referencing Branch Variables
 
 Once set, a branch variable becomes referenceable directly by all subsequent stages that are part of the branch, including any child branches. The value can be referenced as a property on the `branch` object, for example '`branch.planet`', but can also be referenced without the `branch.` prefix.  For example, the following pipeline prints "hello mars":
 
@@ -192,9 +194,9 @@ world = {
 run { hello + world }
 ```
 ---
-# The check statement
+## The check statement
 
-### Synopsis
+#### Synopsis
 
     
     
@@ -214,11 +216,11 @@ run { hello + world }
       }
     
 
-### Availability
+#### Availability
 
 0.9.8.6_beta_2 +
 
-### Behavior
+#### Behavior
 
 The *check* statement gives a convenient way to implement validation of a pipeline's outputs or progress and implement an alternative action if the validation fails. The `check` clause is executed and any `exec` or other statements inside are processed. If one of these fails, then the `otherwise` clause executes.
 
@@ -230,7 +232,7 @@ A convenient use of `check` is in conjunction with [[Success|success]], [[Fail|f
 
 *Note 2*: due to a quirk of Groovy syntax, the *otherwise* command **must** be placed on the same line as the preceding curly bracket of the `check` clause.
 
-### Examples
+#### Examples
 
 **Check that output file is non-zero length and fail the whole pipeline if it is not**
 ```groovy 
@@ -262,16 +264,16 @@ A convenient use of `check` is in conjunction with [[Success|success]], [[Fail|f
   }
 ```
 ---
-# The chr statement
+## The chr statement
 
-### Synopsis
+#### Synopsis
 
     
     
       chr(<digit|letter> sequence, <digit|letter> sequence) * [ <stage1> + <stage2> + ..., ... ]
     
 
-### Behavior
+#### Behavior
 
 The `chr` statement splits execution into parallel paths based on chromosome. For the general case, all the files supplied as input are forwarded to every set of parallel stages supplied in the following list. (See below for an exception to this).
 
@@ -279,13 +281,13 @@ The stages that are executed in parallel receive a special implicit variable, 'c
 
 *Note*: Bpipe doesn't do anything to split the input data by chromosome: all the receiving stages get the whole data set. Thus for this to work, the tools that are executed need to support operations on genomic subregions.
 
-### = File Naming Conventions =
+#### = File Naming Conventions =
 
 When executing inside a chromosomal specific parallel branch of the pipeline, output files are automatically created with the name of the chromosome embedded. This ensures that different parallel branches do not try to write to the same output file. For example, instead of an output file being named "hello.txt" it would be named "hello.chr1.txt" if it was in a parallel branch processing chromosome 1.
 
 If files that are supplied as inputs contain chromosomal segments as part of their file name then the inputs are filtered so that only inputs containing the corresponding chromosome name are forwarded to the parallel segment containing that name. This behavior can be disabled by adding `filterInputs: false` as an additional argument to `chr`.
 
-### Examples
+#### Examples
 
 ** Call variants on a bam file of human reads from each chromosome in parallel **
 ```groovy 
@@ -309,9 +311,9 @@ gatk_call_variants = {
 chr(1..22,'X','Y') * [ gatk_call_variants ]
 ```
 ---
-# Directory Convenience Function
-
 ## Directory Convenience Function
+
+### Directory Convenience Function
 
 Sometimes a command you want requires not the name of an output file, but the name of the directory in which that file resides. This can cause a bit of confusion to Bpipe, because the real output is the file, but what you reference in your command is the directory.
 
@@ -319,7 +321,7 @@ To help with this, Bpipe offers a special meaning for the "dir" extension. When 
 
 The `$input.dir` variable also has special meaning. In this case the `dir` is taken to mean that the whole directory itself should be considered an input, and Bpipe will search for an input that is in fact a directory, rather than a file. This enables you to use the file-extension metaphor for selecting directories within your pipeline for input to your commands. 
 
-### Setting the Output Directory
+#### Setting the Output Directory
 
 While the `input.dir` is a fixed value, `output.dir` is a writeable value, so you can use it to change the value of directory to which outputs will go. Bpipe currently expects all outputs from a pipeline stage to go to the same directory, so setting this to multiple values or different values will not work.
 
@@ -334,7 +336,7 @@ hello = {
 }
 ```
 
-### Example
+#### Example
 
 Here we wish to have fastqc put its output zip file into a directory called "qc_data". However fastqc won't let us tell it the full path of the zip file, only the directory name.
 ```groovy 
@@ -354,16 +356,16 @@ fastqc = {
 }
 ```
 ---
-# The doc statement
+## The doc statement
 
-### Synopsis
+#### Synopsis
 
     
     
       doc [title] | ( attribute1 : value, attribute2: value...)
     
   
-### Attributes
+#### Attributes
 
 Valid documentation Attributes are:
 
@@ -374,7 +376,7 @@ Valid documentation Attributes are:
   <tr><td>constraints</td><td>Any warnings or constraints about using the pipeline stage</td></tr>
 </table>
 
-### Behavior
+#### Behavior
 
 A *doc* statement adds documentation to a pipeline stage.  It is only valid within a declaration of a pipeline stage.  The *doc* statement has one of two forms - a brief from that allows you to give a simple one line description of a pipeline stage and a longer form that lets you specify multiple attributes.
 
@@ -382,7 +384,7 @@ Documentation added with a *doc* statement is currently used when you generate a
 
 *Note*: Bpipe will augment documentation provided with the `doc` command with additional values that are determined at run time, such as the inputs of the pipeline stage, the outputs of the pipeline stage, the versions of executable tools used in the pipeline stage (where those have been able to be determined) and the execution time details (start, stop, duration).
 
-### Examples
+#### Examples
 
 **Add a title for a pipeline stage**
 ```groovy 
@@ -406,15 +408,15 @@ Documentation added with a *doc* statement is currently used when you generate a
   }
 ```
 ---
-# The exec statement
+## The exec statement
 
-### Synopsis
+#### Synopsis
 
     
     exec <shell command to execute>
 
 
-### Behavior
+#### Behavior
 
 The *exec* statement runs the command specified as an argument using a bash shell in a managed fashion.  The command is specified using a string which may be in double quotes, single quotes or triple quotes.  [[Variables]] will be evaluated and expanded even when surrounded by single quotes.  Single quotes inside double quotes are passed through to the underlying shell and thus can be used to pass values that may contain spaces.  
 
@@ -424,15 +426,15 @@ Long commands that are passed to *exec* can be specified over multiple lines by 
 
 An *exec* statement will often be embedded in a [[Produce|produce]], [[Filter|filter]] or [[Transform|transform]] block to specify and manage the outputs of the command.
 
-### Logging
+#### Logging
 
 All commands executed via exec are automatically added to the command history for the run.
 
-### Failure
+#### Failure
 
 If the command fails or is interrupted (by Ctrl-C or kill), the pipeline will be automatically terminated.  Any outputs specified as generated by the stage running the exec command will be marked as dirty and moved to the local bpipe trash folder.  
 
-### Examples
+#### Examples
 
 **Example 1 - echo**
 
@@ -468,9 +470,9 @@ exec """
 """
 ```
 ---
-# Extension syntax for referencing input and output variables
+## Extension syntax for referencing input and output variables
 
-## Introduction
+### Introduction
 
 When you use `$input` and `$output` you are asking for generic input and output file names from Bpipe, and it will give you names corresponding to defaults that it computes from the pipeline stage name. These, however, don't always end up with file extension that are very natural, and also may not be very robust because the type of file to be used is not specified. For example `$input` will refer to the *first* output from the previous pipeline stage - but what if that stage has multiple outputs and it changes their order? Your pipeline stage will get the wrong file. To help with this, you can add file extensions to your input and your output variables:
 ```groovy 
@@ -482,7 +484,7 @@ When you use `$input` and `$output` you are asking for generic input and output 
 
 Here we have specified that this pipeline stage expects an input with file extension ".fastq" and will output a file with file extension ".bam". The first will cause Bpipe search back through previous pipeline stages to find a file ending in .fastq to provide as input. The second will ensure that the output file for this stage ends with a ".bam" file extension.  Using these file extensions is optional, but it makes your pipeline more robust.
 
-## Multiple Inputs
+### Multiple Inputs
 
 When a pipeline stage receives multiple inputs of various kinds, you can use the *$inputs* variable with extension syntax to filter out only those with the file extension you are interested in.
 
@@ -494,7 +496,7 @@ For example, to pass all the inputs ending with '.bam' to a 'merge_bam' command:
   }
 ```
 
-## Limitations
+### Limitations
 
 At the moment extension syntax only works to filter a single file extension. Hence you can't ask for *$input.fastq.gz* - this will cause an error. For these cases you can consider using the [[From|from]] statement to match the right inputs:
 
@@ -507,10 +509,12 @@ At the moment extension syntax only works to filter a single file extension. Hen
   }
 ```
 
-Here we can be sure we'll only match files ending in ".fastq.gz" in our bowtie command.---
-# The succeed statement
+Here we can be sure we'll only match files ending in ".fastq.gz" in our bowtie command.
 
-### Synopsis
+---
+## The succeed statement
+
+#### Synopsis
 
     
 <pre>
@@ -521,11 +525,11 @@ fail [{<text>} | html { <html> } | report(<template>)](text) to channel:<channel
                                                                file: <file to attach> 
 </pre>
  
-### Availability
+#### Availability
 
 0.9.8.6_beta_2 +
 
-### Behavior
+#### Behavior
 
 Causes the current branch of the pipeline to terminate explicitly with a failure status and a provided message.
 
@@ -535,7 +539,7 @@ While using `fail` as a stand alone construct is possible, the primary use case 
 
 *Note*: see the [[Send|send]] command for more information and examples about the variants of this command that send notifications and reports.
 
-### Examples
+#### Examples
 
 **Cause an Explicit Failure of the Pipeline**
 ```groovy 
@@ -543,20 +547,20 @@ While using `fail` as a stand alone construct is possible, the primary use case 
    fail "Sample $branch.name has no variants - processing cannot continue"
 ```
 ---
-# The File Statement
+## The File Statement
 
     
     file(< file path > )
 
-### Availability
+#### Availability
 
 Bpipe version 0.9.8.6
 
-### Behavior
+#### Behavior
 
 A convenience function that creates a Java [File](http://docs.oracle.com/javase/6/docs/api/java/io/File.html) object for the given value. This is nearly functionally equivalent to simply writing '`new File(value)`', however it also converts the given path to a sane, canonicalised form by default, which the default constructor does not do, so that values such as `file(".").name` produce expected results. Bpipe does not check that the file exists or is a valid path.
 
-### Examples
+#### Examples
 
 Pass the full path of the current working directory to a command that requires to know it.
 **
@@ -570,27 +574,27 @@ hello = {
 run { hello }
 ```
 ---
-# The Filter Statement
+## The Filter Statement
 
 
-### Synopsis
+#### Synopsis
 
     
     filter(<filter name>) {
         < statements to filter inputs >
     
     }
-### Behavior
+#### Behavior
 
 Filter is a convenient alias for [[Produce|produce]] where the name of the output or outputs is deduced from the name of the input(s) by keeping the same file extension but adding a new tag to the file name.   For example, if you have a command that removes comment lines from a CSV file *foo.csv*, you can easily declare a section of your script to produce output *foo.nocomments.csv* by declaring a filter with name "nocomments".  In general you will use filter where you are keeping the same format for the data but performing some operation on the data.
 
 The output(s) that are automatically deduced by *filter* will inherit all the behavior implied by the [[Produce|produce]] statement.
 
-### Annotation
+#### Annotation
 
 You can also declare a whole pipeline stage as a filter by adding the Filter annotation prior to the stage in the form `@Filter(<filter name>)`.
 
-### Examples
+#### Examples
 
 **Remove Comment Lines from CSV File**
 ```groovy 
@@ -602,9 +606,9 @@ filter("nocomments") {
 }
 ```
 ---
-# The using instruction
+## The using instruction
 
-### Synopsis
+#### Synopsis
 
     
     
@@ -612,13 +616,13 @@ filter("nocomments") {
     
   
 
-### Behavior
+#### Behavior
 
 A forward instruction overrides the default files that are used for inputs to the next pipeline stage with files that you specify explicitly. You can provide a hard coded file name, but ideally you will pass files that are based on the `input` or `output` implicit variables that Bpipe creates automatically so that your pipeline stage remains generic. 
 
 Bpipe uses heuristics to select the correct output from a pipeline stage that would be passed forward by default to the next stage as an input (assuming the next stage doesn't specify any constraints about what kind of input it wants).  Sometimes however, the output from a pipeline stage is not usually wanted by following stages or Bpipe's logic selects the wrong output. In these cases it is useful to override the default with your own logic to specify which output should become the default.
 
-### Examples
+#### Examples
 
 **Return a BAM file as next input instead of the index file created by the stage**
 ```groovy 
@@ -631,9 +635,9 @@ Bpipe uses heuristics to select the correct output from a pipeline stage that wo
   }
 ```
 ---
-# The from statement
+## The from statement
 
-### Synopsis
+#### Synopsis
 
     
     
@@ -649,7 +653,7 @@ Bpipe uses heuristics to select the correct output from a pipeline stage that wo
       }
     
 
-### Behavior
+#### Behavior
 
 The *from* statement reshapes the inputs to be the most recent output file(s) matching the given pattern for the following block.  This is useful when a task needs an input that was produced earlier in the pipeline than the previous stage, or other similar cases where your inputs don't match the defaults that Bpipe assumes.
 
@@ -659,7 +663,7 @@ The patterns accepted by *from* are glob-like expression using `**` to represent
 
 When provided as a list, *from* will accumulate multiple files with different extensions.  When multiple files match a single extension they are used sequentially each time that extension appears in the list given. 
 
-### Examples
+#### Examples
 
 **Use most recent CSV file to produce an XML file**
 ```groovy 
@@ -694,20 +698,20 @@ When provided as a list, *from* will accumulate multiple files with different ex
   }
 ```
 ---
-# The glob function
+## The glob function
 
-### Synopsis
+#### Synopsis
 
     
     
       glob(<pattern>)
     
 
-### Availability
+#### Availability
 
 0.9.8_beta_1 and higher
 
-### Behavior
+#### Behavior
 
 Returns a list of all the files on the file system that match the specified wildcard pattern. The pattern uses the same format as shell wildcard syntax.
 
@@ -715,7 +719,7 @@ The *glob* function is useful if you want to match a set of files as inputs to a
 
 *Note*: in general, it is better to use `from` directly using a wild card pattern if you can. Such a form searches backwards through the outputs of previous stages rather than directly on the file system. This is much more robust than just scanning the file system for files matching the pattern.
 
-### Examples
+#### Examples
 
 **Run a command with all CSV files in the local directory as input**
 ```groovy 
@@ -727,10 +731,12 @@ The *glob* function is useful if you want to match a set of files as inputs to a
   }
 ```
 
-In this example, the *$input* variable contains all files matching the pattern *`**`.csv* from the local directory, including the original inputs, and intermediate outputs of the pipeline.---
-# The grep statement
+In this example, the *$input* variable contains all files matching the pattern *`**`.csv* from the local directory, including the original inputs, and intermediate outputs of the pipeline.
 
-### Synopsis
+---
+## The grep statement
+
+#### Synopsis
 
     
     
@@ -746,7 +752,7 @@ or
         grep(<regular expression>)
     
 
-### Behavior
+#### Behavior
 
 The *grep* statement is an internal convenience function that processes the input file line by line for each line matching a given regular expression.  
 
@@ -754,7 +760,7 @@ In the first form, the body is executed for each line in the input file that mat
 
 In the second form *grep* works very much like the command line grep with both the input and output file taken from the *input* and *output* variables.   In this case, all matching lines from the input are written to the output.
 
-### Examples
+#### Examples
 
 **Remove lines containing INDEL from a file**
 ```groovy 
@@ -773,11 +779,11 @@ grep("INDEL")
 ---
 Welcome to the bpipe-migration wiki!
 ---
-# The Load Statement
+## The Load Statement
 
     
     load < file name >
-### Behavior
+#### Behavior
 
 Imports the pipeline stages, variables and functions in the specified file into your pipeline script.
 
@@ -785,7 +791,7 @@ Imports the pipeline stages, variables and functions in the specified file into 
 
 *Note*: As of Bpipe 0.9.8.5, a file loaded with `load` can itself contain `load` statements so that you can build multiple levels of dependencies. Use this feature with caution, however, as there is no checking for cyclic depenencies, and thus it is possible to put Bpipe into an infinite loop by having two files that load each other.
 
-### Examples
+#### Examples
 
 **1. Include a file "dependencies.groovy" explicitly into your pipeline**
 ```groovy 
@@ -829,9 +835,9 @@ run {
 }
 ```
 ---
-# The multi statement
+## The multi statement
 
-### Synopsis
+#### Synopsis
 
     
     
@@ -841,11 +847,11 @@ run {
     
     
 
-### Availability
+#### Availability
 
 0.9.8+ 
 
-### Behavior
+#### Behavior
 
 The *multi* statement executes multiple commands in parallel and waits for them all to finish. If any of the commands fail the whole pipeline stage fails, and all the failures are reported.
 
@@ -853,7 +859,7 @@ Generally you will want to use Bpipe's built in [[ParallelTasks|parallelization]
 
 *Note*: if you wish to pass a computed list of commands to *multi*, use the form *multiExec* instead (see example below).
 
-### Examples
+#### Examples
 
 **Using comma delimited list of commands**
 
@@ -887,17 +893,17 @@ hello = {
 run { hello }
 ```
 ---
-# The Output Function
+## The Output Function
 
     
     output(<file name>)
     
 
-### Behavior
+#### Behavior
 
 The `output` function defines an explicit output for a command. It is similar to using a [[Produce]] clause but can be used inline with the definition of a command, using the form `${output(...)}`. In some situations it may be clearer to define outputs in line this way since the definition is collocated with its use. However in many cases it will be clearer to a reader if a [[Produce]] clause is used to show very clearly what outputs are created.
 
-### Examples
+#### Examples
 
 **Cause output to go to file "foo.txt"**
 ```groovy 
@@ -907,13 +913,13 @@ The `output` function defines an explicit output for a command. It is similar to
   }
 ```
 ---
-# Prefix Convenience Function
-
 ## Prefix Convenience Function
+
+### Prefix Convenience Function
 
 Some tools don't ask you for an output file directly, but rather they ask you for a *prefix* for the output file, to which they append a suffix.  For example, the `samtools sort` command requires you to give it the name of the output without the ".bam" suffix. To make this easy to deal with, Bpipe offers a "magic" ".prefix" extension that lets you refer to an output, but pass to the actual command the output trimmed of its suffix.
 
-## Example
+### Example
 
 ```groovy 
 
@@ -932,8 +938,10 @@ The "prefix" function actually works on any string (or text) value in Bpipe scri
     BASE_FILENAME="test.bam".prefix
 ```
 
-**Note:** when you use an expression like `$output.prefix`, it is important to understand that Bpipe considers this a reference to the file in $output, not a reference to a file named as the value that `$output.prefix` evaluates to. This means that if your command does not actually create the file with the name that `$output` evaluates to, you may get an error reported by Bpipe, because this is what it is expecting. For this reason, take care when using the `prefix` construct in conjunction with output variables and use them only when your command will actually create a file with the value of `$output` after being passed a truncated file name, and not simply as a convenience to make a string / text value with the value of `$output` truncated.  ---
-# The Produce Statement
+**Note:** when you use an expression like `$output.prefix`, it is important to understand that Bpipe considers this a reference to the file in $output, not a reference to a file named as the value that `$output.prefix` evaluates to. This means that if your command does not actually create the file with the name that `$output` evaluates to, you may get an error reported by Bpipe, because this is what it is expecting. For this reason, take care when using the `prefix` construct in conjunction with output variables and use them only when your command will actually create a file with the value of `$output` after being passed a truncated file name, and not simply as a convenience to make a string / text value with the value of `$output` truncated.  
+
+---
+## The Produce Statement
 
     
     
@@ -942,7 +950,7 @@ The "prefix" function actually works on any string (or text) value in Bpipe scri
         }
     
 
-### Behavior
+#### Behavior
 
 The *produce* statement declares a block of statements that will be executed *transactionally* to create a given set of outputs.  In this context, "transactional" means that all the statements either succeed together or fail together so that outputs are either fully created, or none are created (in reality, some outputs may be created but Bpipe will move such outputs to the [[Trash|trash folder]]).  Although you do not need to use *produce* to use Bpipe, using *produce* adds robustness and clarity to your Bpipe scripts by making explicit the outputs that are created from a particular pipeline stage. This causes the following behavior:
 
@@ -958,7 +966,7 @@ A wildcard pattern can also be provided as input to `produce`.  In such a case, 
 
 *Note*: as Bpipe assumes ALL matching new files are outputs from the `produce` block, using a wild card pattern inside a parallel block should be treated with caution, as multiple executing pathways may "see" each other's files.
 
-### Examples
+#### Examples
 
 **Produce a single output**
 ```groovy 
@@ -977,10 +985,10 @@ produce("foo.txt", "bar.txt") {
 }
 ```
 ---
-# Executing Inline R Code
+## Executing Inline R Code
 
 
-### Synopsis
+#### Synopsis
 
     
     R {"""
@@ -988,7 +996,7 @@ produce("foo.txt", "bar.txt") {
     
        """}
     
-### Behavior
+#### Behavior
 
 Executes the embedded `R` code by passing it to the `Rscript` utility. Tokens preceded with `$` that match known Bpipe variables are evaluated as Bpipe variables before passing the script through. Other such tokens are passed through unmodified. This has the effect that you can reference your Bpipe variables such as `$input` and `$output` directly inside your R code.
 
@@ -1002,7 +1010,7 @@ R {
 }
 ```
 
-### Examples
+#### Examples
 
 **Plot the values from a tab separated file**
 ```groovy 
@@ -1015,82 +1023,18 @@ R {"""
 """}
 ```
 ---
-# Sidebar
-
-- [[Overview|Overview]]
-- [[Modules|Modules]]
-- [[Trash|Trash Folder]]
-- [[ParallelTasks|Parallel Tasks]]
-- [[ResourceManagers|Resource Managers]]
-- [[Notifications|Notifications and Emails]]
-- [[Logging]]
-- [[Reports|HTML Reports]]
-- [[ToolVersionDatabase|Tool Version Database]]
-- [[Troubleshooting]]
-- [[Regions|Working with Genomic Regions]]
-- **Tutorials and Examples**
-- **Tutorials**
-- [[GettingStarted|Tutorial - HelloWorld]]
-- [[ExampleWithInputsAndOutputs|Tutorial - Inputs and Outputs]]
-- [[RealPipelineTutorial|Tutorial - A Real Bioinformatics Pipeline]]
-- **Examples**
-- [[PairedEndAlignment|Paired End Alignment]]
-- [RNASeq Expression Analysis with Corset](RNASeqCorset)
-- [WGS Variant Calling Pipeline](WGSVariantCalling)
-- **Bpipe Language **
-- [[Variables|variables]]
-- [[ExtensionSyntax|Extension Syntax]]
-- [[Prefix|prefix]]
-- [[Directories|dir]]
-- [[BranchVariables|Branch Variables]]
-- [[Exec|exec]]
-- [[Chr|chr]]
-- [[Check|check]]
-- [[Produce|produce]]
-- [[Fail|fail]]
-- [[File|file]]
-- [[Filter|filter]]
-- [[Transform|transform]]
-- [[From|from]]
-- [uses](uses)
-- [[Grep|grep]]
-- [[Glob|glob]]
-- [[Multi|multi]]
-- [[Segments|segment]]
-- [[Doc|doc]]
-- [[About|about]]
-- [[Using|using]]
-- [[Forward|forward]]
-- [[Load|load]]
-- [[Output|output]]
-- [preserve](preserve_in_pipeline)
-- [R](R)
-- [[Send|send]]
-- [[Succeed|succeed]]
-- [- [requires](var])
-- **Bpipe Command Line Utility**
-- [- [run](execute])
-- [- [log](jobs])
-- [- [query](history])
-- [- [status](retry])
-- [- [test](stop])
-- [- [preserve](cleanup])
-- [[SupportedOperatingSystems|Supported Operating Systems]]
-- **Development**
-- [[DevelopmentSetup|Building Bpipe & Setting up a Development Environment]]
-- [[Credits]]---
-# The Segment Statement
+## The Segment Statement
 
     
     segment_name = segment {
         < pipeline stage > + < pipeline stage > + ...
     
     }
-### Behavior
+#### Behavior
 
 Defines a reusable segment of a pipeline that can be made up of multiple pipeline stages.  The segment then behaves just like a normal pipeline stage itself.   This statement is useful when you have a commonly reoccurring sequence of pipeline stages that you wish to use multiple times in your pipelines, or even multiple times in a single pipeline.
 
-### Examples
+#### Examples
 
 **Define a simple Pipeline Segment**
 ```groovy 
@@ -1112,9 +1056,9 @@ Bpipe.run {
 }
 ```
 ---
-# The send statement
+## The send statement
 
-### Synopsis
+#### Synopsis
 
     
     
@@ -1124,11 +1068,11 @@ send [{<text>} | html { <html> } | report(<template>)](text) to channel:<channel
                                                                file: <file to attach> 
 </pre>
  
-### Availability
+#### Availability
 
 0.9.8.6_beta_2 +
 
-### Behavior
+#### Behavior
 
 Sends the specified content through the specified communication channel.
 
@@ -1142,7 +1086,7 @@ The final form allows specification of a template. The template should end with 
 
 *Note*: a common scenario is to terminate a branch of a pipeline due to a failure or exceptional situation and to send a status message about that. To make this convenient, the [[Succeed|succeed]] and [[Fail|fail]] commands can accept the same syntax as `send`, but also have the effect of terminating the execution of the current pipeline branch with a corresponding status message.
 
-### Examples
+#### Examples
 
 **Send a message via Google Talk**
 ```groovy 
@@ -1175,9 +1119,9 @@ The final form allows specification of a template. The template should end with 
     send report("report-template.html") to channel: gmail, file: output1.txt
 ```
 ---
-# The succeed statement
+## The succeed statement
 
-### Synopsis
+#### Synopsis
 
     
     
@@ -1188,11 +1132,11 @@ succeed [{<text>} | html { <html> } | report(<template>)](text) to channel:<chan
                                                                file: <file to attach> 
 </pre>
  
-### Availability
+#### Availability
 
 0.9.8.6_beta_2 +
 
-### Behavior
+#### Behavior
 
 Causes the current branch of the pipeline (or the whole pipeline, if executed in the root branch) to terminate with a successful status, but without producing any outputs.
 
@@ -1204,7 +1148,7 @@ While using `succeed` as a stand alone construct is possible, the primary use ca
 
 *Note*: see the [[Send|send]] command for more information and examples about the variants of this command that send notifications and reports.
 
-### Examples
+#### Examples
 
 **Terminate Branch Successfully**
 ```groovy 
@@ -1212,7 +1156,7 @@ While using `succeed` as a stand alone construct is possible, the primary use ca
    succeed "Sample $branch.name has no variants"
 ```
 ---
-# The Transform Statement
+## The Transform Statement
 
     
     transform(<transform name>) {
@@ -1225,7 +1169,7 @@ While using `succeed` as a stand alone construct is possible, the primary use ca
         < statements to transform inputs >
     
     }
-### Behavior
+#### Behavior
 
 Transform is a convenient alias for [[Produce|produce]] where the name of the
 output or outputs is deduced from the name of the input(s) by modifying the
@@ -1243,11 +1187,11 @@ The input and output patterns are assumed to match to the end of the file name, 
 
 *Note*: input file patterns that contain no regular expression characters, or that end in "." followed by plain characters are treated as file extensions. ie: ".xml" is treated as ".xml", not "any character followed by xml".
 
-### Annotation
+#### Annotation
 
 You can also declare a whole pipeline stage as a transform by adding the Transform annotation prior to the stage in the form `@Transform(<filter name>)`. This form is a bit less flexible, but more concise when you don't need the flexibility.
 
-### Examples
+#### Examples
 
 **Remove Comment Lines from CSV File**
 ```groovy 
@@ -1271,10 +1215,12 @@ fastqc = {
 }
 ```
 
-Note also that since the output zip files from FastQC are usually not used downstream, we forward the input files rather than the default of letting the output files be forwarded to the next stage.---
-# The using instruction
+Note also that since the output zip files from FastQC are usually not used downstream, we forward the input files rather than the default of letting the output files be forwarded to the next stage.
 
-### Synopsis
+---
+## The using instruction
+
+#### Synopsis
 
     
     
@@ -1282,11 +1228,11 @@ Note also that since the output zip files from FastQC are usually not used downs
     
   
 
-### Behavior
+#### Behavior
 
 A *using* instruction causes variables to be defined inside a pipeline stage as part of pipeline construction.  It is only valid inside a Bpipe *run* or [[Segments|segment]] clause.  The *using* instruction is useful to pass parameters or configuration attributes to pipeline stages to allow them to work differently for different pipelines.
 
-### Examples
+#### Examples
 
 **Sleep for a configurable amount of time and say hello to a specified user**
 ```groovy 
@@ -1301,14 +1247,14 @@ A *using* instruction causes variables to be defined inside a pipeline stage as 
   }
 ```
 ---
-# Variables in Bpipe
+## Variables in Bpipe
 
 Bpipe supports variables inside Bpipe scripts.  In Bpipe there are two kinds of variables: 
 
 - *implicit* variables  - variables defined by Bpipe for you
 - *explicit* variables  - variables you define yourself
 
-### Implicit Variables
+#### Implicit Variables
 
 Implicit variables are special variables that are made available to your Bpipe pipeline stages automatically.   The two important implicit variables are:
 
@@ -1319,7 +1265,7 @@ Implicit variables are special variables that are made available to your Bpipe p
 
 The input and output variables are how Bpipe automatically connects tasks together to make a pipeline.  The default input to a stage is the output from the previous stage. In general you should always try to use these variables instead of hard coding file names into your commands.   Using these variables ensures that your tasks are reusable and can be joined together to form flexible pipelines.  
 
-### =Extension Syntax for Input and Output Variables=
+#### =Extension Syntax for Input and Output Variables=
 
 Bpipe provides a special syntax for easily referencing inputs and outpus with specific file extensions. See [[ExtensionSyntax]] for more information.
 
@@ -1339,7 +1285,7 @@ Different tasks have different numbers of inputs and outputs, so what happens wh
 
 - When a stage has multiple outputs, the first such output is treated as the "primary" output and appears to the next stage as the "input" variable.  If the following stage only accepts a single input then its input will be the primary output of the previous stage.
 
-### Explicit Variables
+#### Explicit Variables
 
 Explicit variables are ones you define yourself.  These variables are created inline inside your Bpipe scripts using Java-like (or Groovy) syntax.  They can be defined inside your tasks or outside of your tasks to share them between tasks.  For example, here two variables are defined and shared between two tasks:
 ```groovy 
@@ -1356,7 +1302,7 @@ Explicit variables are ones you define yourself.  These variables are created in
   }
 ```
 
-### Variable Evaluation
+#### Variable Evaluation
 
 Most times the way you will use variables is by referencing them inside shell commands that you are running using the *exec* statement.  Such statements define the command using single quotes, double quotes or triple quotes.  Each kind of quotes handles variable expansion slightly differently:
 
@@ -1400,7 +1346,7 @@ will reach the shell as exactly:
 
 See the [[Exec|exec]] statement for a longer example of using triple quotes.
 
-### Referencing Variables Directly
+#### Referencing Variables Directly
 
 Inside a task the variables can be referenced using Java-like (actually Groovy) syntax.  In this example Java code is used to check if the input already exists:
 ```groovy 
@@ -1415,7 +1361,7 @@ Inside a task the variables can be referenced using Java-like (actually Groovy) 
 
 You won't normally need to use this kind of syntax in your Bpipe scripts, but it is available if you need it to handle complicated or advanced scenarios.
 
-### Differences from Bash Variable Syntax
+#### Differences from Bash Variable Syntax
 
 Bpipe's variable syntax is mostly compatible with the same syntax in languages like Bash and Perl. This is very convenient because it means that you can copy and paste commands directly from your command line into your Bpipe scripts, even if they use environment variables.
 
@@ -1434,8 +1380,10 @@ In this case the $ followed by the open bracket is illegal because Bpipe will tr
   exec "for i in \$(ls **.bam); do samtools index $i; done"
 ```
 
-- Bpipe treats a `.` as a special character for querying a property, while Bash merely delimits a variable name with it. Hence if you wish to write `$foo.txt` to have a file with '.txt' appended to the value of variable foo, you need to use curly braces: `${foo}.txt`.---
-# The Preserve Statement
+- Bpipe treats a `.` as a special character for querying a property, while Bash merely delimits a variable name with it. Hence if you wish to write `$foo.txt` to have a file with '.txt' appended to the value of variable foo, you need to use curly braces: `${foo}.txt`.
+
+---
+## The Preserve Statement
 
     
     preserve(<substring>) {
@@ -1448,11 +1396,11 @@ In this case the $ followed by the open bracket is illegal because Bpipe will tr
         <statements> 
     }
 
-### Behavior
+#### Behavior
 
 Causes the outputs generated by statements inside the block to be marked as preserved, and thus will not be automatically cleaned up by a `bpipe cleanup` command. 
 
-### Examples
+#### Examples
 
 **Ensure the VCF file of a Variant Calling Operation is not Deleted by Cleanup**
 
@@ -1475,20 +1423,20 @@ preserve("*.vcf") {
 }
 ```
 ---
-# The Requires Statement
+## The Requires Statement
 
     
     requires < variable name > : Message to display if value not provided
 
-### Availability
+#### Availability
 
 Bpipe version 0.9.8.6
 
-### Behavior
+#### Behavior
 
 Specify a parameter or variable that must be provided for this pipeline stage to run. The variable can be provided with a [[Using]] construct, by passing a value on the command line (--param option), or simply by defining the variable directly in the pipeline script. If the variable is not defined by one of these mechanisms, Bpipe prints out an error message to the user, including the message defined by the `requires` statement.
 
-### Examples
+#### Examples
 
 **This Pipeline will Print an Error because WOLRD is not defined anywhere**
 ```groovy 
@@ -1540,9 +1488,9 @@ WORLD="mars"
 run { hello }
 ```
 ---
-# The uses statement
+## The uses statement
 
-### Synopsis
+#### Synopsis
 
     
     
@@ -1551,11 +1499,11 @@ run { hello }
       }
     
 
-### Availability
+#### Availability
 
 0.9.8_beta_3 and higher
 
-### Behavior
+#### Behavior
 
 The *uses* statement declares that the enclosed block will use the resources declared in brackets. The resources are specified in the form *type*:integer where predefined types are "threads", "MB" or "GB". The latter two refer to memory. Custom resource types can be used by simply specifying arbitrary names for the resources.
 
@@ -1563,7 +1511,7 @@ Once resources have been declared, any [[Exec|exec]] statement that appears in t
 
 The purpose of this statement is to help you control concurrency to achieve better utilization and prevent over-utilization of server resources, particularly when different parts of your pipeline have different resource needs. Some stages may be able to run many instances in parallel without overloading your server, while others may only be able to run a small number in parallel without overloading the system. You can solve these problems to get consistently high utilization throughout your pipeline by adding *uses* blocks around key parts of your pipeline.
 
-### Examples
+#### Examples
 
 **Run bwa with 4 threads, ensuring that no more than 16GB, 12 threads and 3 temporary files are in use at any one time**
 ```groovy 
@@ -1584,20 +1532,20 @@ The pipeline would be executed with:
     bpipe run pipeline.groovy -n 12 -m 16384 -l tempfiles=3 test.fq 
 ```
 ---
-# The Var Statement
+## The Var Statement
 
     
     var < variable name > : <default value>
 
-### Availability
+#### Availability
 
 Bpipe version 0.9.8.1
 
-### Behavior
+#### Behavior
 
 Define a variable with a default value, that can be overridden with a [[Using]] construct, or by passing a value on the command line (--param option).
 
-### Examples
+#### Examples
 
 **Say hello to earth**
 ```groovy 
