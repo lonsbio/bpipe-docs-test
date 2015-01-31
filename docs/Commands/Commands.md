@@ -3,7 +3,7 @@
 Bpipe without any arguments will:
 
 ```
-pe Version 0.9.8.6   Built on Wed Oct 22 16:06:17 EST 2014
+Bpipe Version 0.9.8.6   Built on Wed Oct 22 16:06:17 EST 2014
 
 usage: bpipe [run|test|debug|execute] [options] <pipeline> <in1> <in2>...
              retry [test]
@@ -75,7 +75,9 @@ bpipe cleanup -y
 
 bpipe cleanup *.bam
 ```
+
 ---
+
 ## run
 
 #### Synopsis
@@ -126,7 +128,10 @@ And running it using:
 
   bpipe run test.groovy
 ```
+
 ---
+
+
 ## history
 
 #### Synopsis
@@ -139,7 +144,10 @@ And running it using:
 #### Description
 
 Show a list of the jobs that were previously run in the local folder including the bpipe command line and arguments.
+
+
 ---
+
 ## jobs
 
 
@@ -180,7 +188,9 @@ Will display the last 2000 lines of the log instead of the default (which is to 
 #### Description
 
 Display the log file for the currently running, or most recently run Bpipe job in the local directory.  If the job is running, this command will "tail" the log file using the -f option so that you see a continuous scrolling log.  If it is not finished it will show the trailing lines of the log and exit back to the shell.
+
 ---
+
 ## preserve
 
 #### Synopsis
@@ -206,7 +216,9 @@ Here we assume that all the BAM files that are outputs of the 'realignment' stag
 
 bpipe preserve *.realigned.bam
 ```
+
 ---
+
 ## query
 
 #### Synopsis
@@ -241,7 +253,9 @@ bpipe query
 
 bpipe query foo.txt
 ```
+
 ---
+
 ## retry
 
 #### Synopsis
@@ -266,6 +280,8 @@ It should also be noted that when a command in a pipeline stage fails, Bpipe wil
 main feature of 'retry' is that it automatically looks up the exact that you ran the previous time you ran Bpipe in the local directory and re-executes it with the same options and input files. 
 
 ---
+
+
 ## run
 
 #### Synopsis
@@ -314,7 +330,9 @@ The file params.txt should have one option per line, for example:
 -p foo=bar
 -p baz=fubar
 ```
+
 ---
+
 ## status
 
 #### Synopsis
@@ -329,6 +347,7 @@ The file params.txt should have one option per line, for example:
 Displays a list of currently running commands by the pipeline in the current directory.
 
 ---
+
 ## stop
 
 #### Synopsis
@@ -343,6 +362,7 @@ Displays a list of currently running commands by the pipeline in the current dir
 Stop the current job (if any) that is currently running in the local folder.  Any inputs not finished being created by the currently executing pipeline stage(s) will be cleaned up and moved to the [[Trash|Trash Folder]].
 
 ---
+
 ## test
 
 #### Synopsis
@@ -363,4 +383,5 @@ Note: the `test` command can also be invoked using retry to test the command tha
 
 bpipe retry test
 ```
+
 ---
