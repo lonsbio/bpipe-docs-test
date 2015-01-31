@@ -1,14 +1,14 @@
 site_name: Bpipe Documentation
 repo_url: https://github.com/ssadedin/bpipe
 pages:
-- ['index.md', 'Introduction']
+- ['index.md', 'Welcome!']
+- ['Overview/Introduction.md','Overview','Introduction']
 - ['Overview/ComparisonToWorkflowTools.md','Overview','Comparison To Workflow Tools']
 - ['Overview/InstallInstructions.md','Overview','Install Instructions']
-- ['Overview/Introduction.md','Overview','Introduction']
-- ['Tutorials/ExampleWithInputsAndOutputs.md','Tutorials','Example With Inputs And Outputs']
 - ['Tutorials/Hello,World.md','Tutorials','Hello, World']
+- ['Tutorials/ExampleWithInputsAndOutputs.md','Tutorials','Example With Inputs And Outputs']
 - ['Tutorials/RealPipelineTutorial.md','Tutorials','Real Pipeline Tutorial']
-- ['Commands/cleanup.md','Commands','cleanup']
+- ['Commands/Commands.md','Commands','Bpipe command line']
 - ['Commands/execute.md','Commands','execute']
 - ['Commands/history.md','Commands','history']
 - ['Commands/jobs.md','Commands','jobs']
@@ -20,6 +20,7 @@ pages:
 - ['Commands/status.md','Commands','status']
 - ['Commands/stop.md','Commands','stop']
 - ['Commands/test.md','Commands','test']
+- ['Language/Language.md','Language','Bpipe language']
 - ['Language/About.md','Language','About']
 - ['Language/BpipeVariables.md','Language','Bpipe Variables']
 - ['Language/BranchVariables.md','Language','Branch Variables']
