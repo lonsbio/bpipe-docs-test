@@ -23,7 +23,7 @@ pages:
 - ['Guides/Trash.md','Bpipe utility','Trash']
 - ['Language/About.md','Bpipe language','About']
 - ['Language/BpipeVariables.md','Bpipe language','Bpipe Variables']
-- ['Guides/ParallelTasks.md','Bpipe language','Parallel Tasks']
+- ['Language/ParallelTasks.md','Bpipe language','Parallel Tasks']
 - ['Language/BranchVariables.md','Bpipe language','Branch Variables']
 - ['Language/Check.md','Bpipe language','Check']
 - ['Language/Chr.md','Bpipe language','Chr']
