@@ -5,14 +5,13 @@ The field of tools for managing computational workflows is quite crowded.  With 
 
 ## Feature Comparison Table
 
-<table>
-  <tr><td>Tool</td><td>GUI</td><td>Command Line (`**`)</td><td>Audit Trail</td><td>Built in Cluster Support</td><td>Workflow Sharing</td><td>Online Data Source Integration</td><td>Need Programming Knowledge?</td><td>Easy Shell Script Portability</td></tr>
-  <tr><td>Bpipe</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>Yes</td></tr>
-  <tr><td>Ruffus</td><td>No</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>Yes</td><td>No</td></tr>
-  <tr><td>Galaxy</td><td>Yes</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td></tr>
-  <tr><td>Taverna</td><td>Yes</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td></tr>
-  <tr><td>Pegasus</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td></tr>
-</table>
+  |Tool|GUI|Command Line (`**`)|Audit Trail|Built in Cluster Support|Workflow Sharing|Online Data Source Integration|Need Programming Knowledge?|Easy Shell Script Portability|
+  |:------/:-----:/:----:/:-----:/:----:/:-----:/:----:/:-----:/:----:/ 
+  |Bpipe|No|Yes|Yes|Yes|No|No|No|Yes|
+  |Ruffus|No|Yes|Yes|No|No|No|Yes|No|
+  |Galaxy|Yes|No|Yes|Yes|Yes|Yes|No|No|
+  |Taverna|Yes|No|Yes|Yes|Yes|Yes|No|No|
+  |Pegasus|Yes|Yes|Yes|Yes|Yes|Yes|Yes|No|
 
 `**` Nearly all the tools have ways to execute things from the command line; what we are meaning here is whether that is the native way supported for the tool, and thus whether it is very easy and natural to use the tool that way.
 
