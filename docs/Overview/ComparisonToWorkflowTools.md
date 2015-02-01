@@ -6,7 +6,7 @@ The field of tools for managing computational workflows is quite crowded.  With 
 ## Feature Comparison Table
 
   |Tool|GUI|Command Line (`**`)|Audit Trail|Built in Cluster Support|Workflow Sharing|Online Data Source Integration|Need Programming Knowledge?|Easy Shell Script Portability|
-  |:------/:-----:/:----:/:-----:/:----:/:-----:/:----:/:-----:/:----:/ 
+  |:------|:-----:|:----:|:-----:|:----:|:-----:|:----:|:-----:|:----:| 
   |Bpipe|No|Yes|Yes|Yes|No|No|No|Yes|
   |Ruffus|No|Yes|Yes|No|No|No|Yes|No|
   |Galaxy|Yes|No|Yes|Yes|Yes|Yes|No|No|
