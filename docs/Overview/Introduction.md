@@ -1,9 +1,3 @@
-# Overview of Bpipe
-
-## Someting
-
-### Introduction
-
 Bpipe is two things:
 
 - A small language for defining pipeline stages and linking them together to make pipelines
