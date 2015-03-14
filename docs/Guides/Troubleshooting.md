@@ -1,9 +1,9 @@
+# Getting Help
 
-## Help
+- Find help at: https://groups.google.com/forum/#!forum/bpipe-discuss
+- Log issues on GitHub: https://github.com/ssadedin/bpipe/issues
 
-Find help at: https://groups.google.com/forum/#!forum/bpipe-discuss
-
-Log issues on GitHub: https://github.com/ssadedin/bpipe/issues
+Some common problems are listed below.
 
 ## Troubleshooting common problems
 

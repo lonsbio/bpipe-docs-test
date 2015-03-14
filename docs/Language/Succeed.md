@@ -2,14 +2,14 @@
 
 ### Synopsis
 
-    
+```    
     
     succeed <message>
     succeed [text {<text>} | html { <html> } | report(<template>)] to <notification channel name><pre>
-succeed [{<text>} | html { <html> } | report(<template>)](text) to channel:<channel name>, 
+    succeed [{<text>} | html { <html> } | report(<template>)](text) to channel:<channel name>, 
                                                                subject:<subject>, 
                                                                file: <file to attach> 
-</pre>
+```
  
 ### Availability
 
