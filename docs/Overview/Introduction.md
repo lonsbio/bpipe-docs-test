@@ -1,6 +1,8 @@
-## Overview of Bpipe
+# Overview of Bpipe
 
-## Introduction
+##
+
+### Introduction
 
 Bpipe is two things:
 
@@ -9,7 +11,7 @@ Bpipe is two things:
 
 Bpipe does not replace the commands you run within your pipeline, but rather it helps you to run them better - more safely, more reliably and more conveniently.
 
-## The Bpipe Language
+### The Bpipe Language
 
 The Bpipe language is a minimal syntax for declaring how to run your pipeline stages.  Bpipe is actually a [Domain Specific Language](http://en.wikipedia.org/wiki/Domain-specific_language) based on Groovy, a scripting language that inherits syntax from Java.  All Bpipe scripts are valid Groovy scripts, and most Java syntax works in Bpipe scripts.  However you don't need to know either Java or Groovy to use Bpipe.
 
@@ -59,7 +61,7 @@ Bpipe.run {
 }
 ```
 
-## The Bpipe Command Line Utility
+### The Bpipe Command Line Utility
 
 Bpipe comes with a tool to run and manage your scripts called *bpipe* (surprise!).  The most basic use of the bpipe command is to run your pipelines.   To do that, you simply save your pipeline definition in a file and then run the pipeline:
 ```groovy 
@@ -93,6 +95,6 @@ To see what bpipe jobs you currently have running:
   bpipe jobs
 ```
 
-## Next Steps
+### Next Steps
 
 To learn more about how Bpipe works, take a look at the [[GettingStarted|Tutorial]] where you can work through creating a very simple pipeline .  Or if you are already comfortable with the basics of how bpipe is working you can jump straight to an example of a [[RealPipelineTutorial|real bioinformatics pipeline]].
