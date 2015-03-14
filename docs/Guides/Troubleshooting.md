@@ -1,4 +1,11 @@
-# Troubleshooting common problems
+
+## Help
+
+Find help at: https://groups.google.com/forum/#!forum/bpipe-discuss
+
+Log issues on GitHub: https://github.com/ssadedin/bpipe/issues
+
+## Troubleshooting common problems
 
 ### My Pipeline Fails but I think it Succeeded!
 
