@@ -1,4 +1,4 @@
-# Overview of Bpipe
+## Overview of Bpipe
 
 ## Introduction
 

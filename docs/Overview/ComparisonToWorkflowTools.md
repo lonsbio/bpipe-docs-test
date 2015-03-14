@@ -13,6 +13,7 @@ The field of tools for managing computational workflows is quite crowded.  With 
   |Taverna|Yes|No|Yes|Yes|Yes|Yes|No|No|
   |Pegasus|Yes|Yes|Yes|Yes|Yes|Yes|Yes|No|
 
+
 `**` Nearly all the tools have ways to execute things from the command line; what we are meaning here is whether that is the native way supported for the tool, and thus whether it is very easy and natural to use the tool that way.
 
 As can be seen above, Bpipe's most unique feature is the 'Easy Shell Script Portability', which is  admittedly a somewhat made up category to represent Bpipe's strongest point:  if your bread and butter is running things on the command line then Bpipe is your shortest path to turning those into a robust pipeline.   What's more, you can do it with Bpipe without learning a 'programming language' as such;  Bpipe pipelines are declarative and  simple.  In general while Bpipe lacks the higher level features of many tools, its minimalist approach allows it to be substantially simpler and more flexible than other tools.  If that appeals to you, then Bpipe could be the right tool for you.
